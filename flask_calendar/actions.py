@@ -34,12 +34,16 @@ def index_action() -> Response:
     username = get_session_username(session_id=str(request.cookies.get(constants.SESSION_ID)))
     authentication = get_authentication()
     user_data = authentication.user_data(username)
-    return redirect("/{}/".format(user_data["default_calendar"]))
+    return redirect("/main/{}/".format(user_data["default_calendar"]))
+    #return redirect("/{}/".format(user_data["default_calendar"]))
 
+@authenticated
+@authorized
+def main(calendar_id: str) -> Response:
+    return cast(Response, render_template("main.html", calendar_id=calendar_id))
 
 def login_action() -> Response:
     return cast(Response, render_template("login.html"))
-
 
 def do_login_action() -> Response:
     username = request.form.get("username", "")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <title>
@@ -23,7 +23,7 @@
     {% endif %}
     <div id="task-details-form" class="task-details-form">
 
-        <label for="text">Title</label>
+        <label for="text">Titre</label>
         <input type="text" autocomplete="off" tabindex="0" placeholder="Title" value="{{ task.get("title", "") }}"
             id="title" name="title" minlength="2" required />
         <br/>
@@ -33,7 +33,7 @@
         <input type="hidden" id="date" name="date" value="{{ task["date"] }}" />
         <br/>
 
-        <label for="is_all_day">All day event</label>
+        <label for="is_all_day">Journée complète</label>
         <input type="checkbox" id="is_all_day" name="is_all_day" value="1"
             {% if task["is_all_day"] %}
                 checked="checked"
@@ -46,15 +46,15 @@
                 class="hidden"
             {% endif %}
              >
-            <label for="start_time">Start time</label>
+            <label for="start_time">Début</label>
             <input type="time" id="start_time" name="start_time" value="{{ task.get("start_time", "00:00") }}" />
             <br/>
-            <label for="end_time">End time</label>
+            <label for="end_time">Fin</label>
             <input type="time" id="end_time" name="end_time" value="{{ task.get("end_time", "00:00") }}" />
             <br/>
         </div>
 
-        <label for="repeats">Recurrent</label>
+        <label for="repeats">Récurrent</label>
         <input type="checkbox" id="repeats" name="repeats" value="1"
             {% if task["repeats"] %}
                 checked="checked"
@@ -71,14 +71,14 @@
                     checked="checked"
                 {% endif %}
                 >
-            <label for="type_weekly">Occurs Weekly</label>
+            <label for="type_weekly">Toutes les semaines</label>
 
             <input type="radio" id="type_monthly" name="repetition_type" value="m"
                 {% if task.get("repetition_type") == "m" %}
                     checked="checked"
                 {% endif %}
                 >
-            <label for="type_monthly">Occurs Monthly</label>
+            <label for="type_monthly">Tous les mois</label>
             <br/>
 
             <input type="radio" id="subtype_weekly" name="repetition_subtype" value="w"
@@ -86,7 +86,7 @@
                     checked="checked"
                 {% endif %}
                 >
-            <label for="subtype_weekly">Week day</label>
+            <label for="subtype_weekly">Tous les jours</label>
 
             <input type="radio" id="subtype_monthly" name="repetition_subtype" value="m"
                 {% if task.get("repetition_subtype") == "m" %}
@@ -95,25 +95,25 @@
                     disabled="disabled"
                 {% endif %}
                 >
-            <label for="subtype_monthly">Month day</label>
+            <label for="subtype_monthly">Jour du mois</label>
             <br/>
 
-            <label for="repetition_value_weekday">Week Day</label>
+            <label for="repetition_value_weekday">Jour de la semaine</label>
             <select name="repetition_value_weekday" id="repetition_value_weekday"
                 {% if task.get("repetition_subtype") == "m" %}
                     disabled="disabled"
                 {% endif %}
                 >
-                <option value="0">Monday</option>
-                <option value="1">Tuesday</option>
-                <option value="2">Wednesday</option>
-                <option value="3">Thursday</option>
-                <option value="4">Friday</option>
-                <option value="5">Saturday</option>
-                <option value="6">Sunday</option>
+                <option value="0">Lundi</option>
+                <option value="1">Mardi</option>
+                <option value="2">Mercredi</option>
+                <option value="3">Jeudi</option>
+                <option value="4">Vendredi</option>
+                <option value="5">Samedi</option>
+                <option value="6">Dimanche</option>
             </select>
 
-            <label for="repetition_value_monthday">Month Day</label>
+            <label for="repetition_value_monthday">Jour du mois</label>
             <select name="repetition_value_monthday" id="repetition_value_monthday"
                 {% if task.get("repetition_subtype") == "w" %}
                     disabled="disabled"
@@ -156,12 +156,12 @@
 
         </div>
 
-        <label for="details">Details</label><br/>
+        <label for="details">Détails</label><br/>
         <textarea id="details" name="details" placeholder="Details" autocomplete="off" cols="42"
             rows="8">{{ task["details"]|replace("<br>","\n") }}</textarea>
         <br/>
 
-        <label for="color">Color</label><br/>
+        <label for="color">Couleur</label><br/>
         <input class="form-button color-picker" type="color"
             value="{{ task.get("color", button_default_color_value) }}" id="color_custom" />
         {% for color, label in buttons_colors %}
@@ -178,11 +178,11 @@
             <br/>
         {% endif %}
 
-        <input class="form-button" type="submit" value="Save" />
+        <input class="form-button" type="submit" value="Enregistrer" />
 
-        <input class="form-button" id="delete-task" type="button" value="Delete" />
+        <input class="form-button" id="delete-task" type="button" value="Supprimer" />
 
-        <input class="form-button" type="button" value="Cancel" onclick="window.history.go(-1); return false;" />
+        <input class="form-button" type="button" value="Annuler" onclick="window.history.go(-1); return false;" />
     </div>
     </form>
 

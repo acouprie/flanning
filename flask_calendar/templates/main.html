@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+</head>
+{% block body %}
+    <h1>Planning de la Bogerais</h1>
+    <a href={{ url_for('user_edit') }}>Editer le profile</a>
+
+    <img id="banner" src="/static/images/chapelle.jpg" alt="Chapelle" />
+    <br />
+    <h2>Le Chat</h2>
+
+    <iframe id="chat_frame" src={{ url_for('chat') }}>
+    </iframe>
+
+    <h2>Le planning</h2>
+    <div class="text_block">
+        <ul>
+            <p>
+                En cliquant sur un jour :
+                <li>Un simple click ajoute une présence</li>
+                <li>Un double click permet d'éditer une nouvelle présence</li>
+            </p>
+            <p>
+                En cliquant sur une présence :
+                <li>La croix supprime la présence</li>
+                <li>Le bouton E permet d'éditer</li>
+            </p>
+        </ul>
+    </div>
+    <a href={{ url_for('main_calendar_action', calendar_id=calendar_id) }}>Calendar</a>
+    <iframe id="calendar_frame" src={{ url_for('main_calendar_action', calendar_id=calendar_id) }}>
+    </iframe>
+{% endblock %}

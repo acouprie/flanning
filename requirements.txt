@@ -1,2 +1,4 @@
 flask
 cachelib
+flask-socketio
+flask-cors

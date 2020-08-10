@@ -11,7 +11,7 @@ RUN pip install -r /code/requirements-dev.txt
 # --- Comment this if you don't want to change/use locales
 RUN apt-get -y update
 RUN apt-get install -y locales
-RUN echo 'es_ES.UTF-8 UTF-8\n' >> /etc/locale.gen
+RUN echo 'fr_FR.UTF-8 UTF-8\n' >> /etc/locale.gen
 RUN locale-gen
 # ---
 

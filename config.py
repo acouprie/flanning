@@ -8,9 +8,9 @@ MIN_YEAR = 2017
 MAX_YEAR = 2100
 PASSWORD_SALT = "something random and full of non-standard characters"
 HOST_IP = "0.0.0.0"  # set to None for production
-LOCALE = "es_ES.UTF-8"
+LOCALE = "fr_FR.UTF-8"
 # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-TIMEZONE = "Europe/Madrid"
+TIMEZONE = "Europe/Paris"
 
 WEEK_STARTING_DAY = constants.WEEK_START_DAY_SUNDAY
 
@@ -24,7 +24,7 @@ FAILED_LOGIN_DELAY_BASE = 2
 # If true, will automatically decorate hyperlinks with <a> tags upon rendering them
 AUTO_DECORATE_TASK_DETAILS_HYPERLINK = True
 
-SHOW_VIEW_PAST_BUTTON = True
+SHOW_VIEW_PAST_BUTTON = False
 
 # Of use if SHOW_VIEW_PAST_BUTTON is False
 HIDE_PAST_TASKS = False
@@ -42,15 +42,16 @@ EMOJIS_ENABLED = True
 # Colors for new task buttons
 BUTTON_CUSTOM_COLOR_VALUE = "#3EB34F"
 BUTTONS_COLORS_LIST = (
-    ("#FF4848", "Red"),
-    ("#3EB34F", "Green"),
-    ("#2966B8", "Blue"),
-    ("#808080", "Grey"),
-    ("#B05F3C", "Brown"),
-    ("#9588EC", "Purple"),
+    ("#FF4848", "Rouge"),
+    ("#3EB34F", "Vert"),
+    ("#2966B8", "Bleu"),
+    ("#808080", "Gris"),
+    ("#B05F3C", "Marron"),
+    ("#9588EC", "Violet"),
     ("#F2981A", "Orange"),
-    ("#3D3D3D", "Black"),
+    ("#3D3D3D", "Noir"),
 )
+
 # Emojis for new task buttons
 BUTTONS_EMOJIS_LIST = (
     "💬",

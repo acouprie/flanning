@@ -10,7 +10,19 @@
 <body>
 
     <div id="statusbar" class="">Processing...</div>
-
+    <form id="create_new_task" method="POST" action="/{{ calendar_id }}/new_task">
+        <input type="hidden" autocomplete="off" tabindex="0" placeholder="Title" value="Test"
+        id="title" name="title" minlength="2" required />
+        <input type="hidden" id="date" name="date" value="2020-08-11" />
+        <input type="hidden" id="is_all_day" name="is_all_day" value="1" />
+        <input type="hidden" id="start_time" name="start_time" value="00:00" />
+        <input type="hidden" id="end_time" name="end_time" value="00:00" />
+        <input type="hidden" id="repetition_value_weekday" name="repetition_value_weekday" value="0" />
+        <input type="hidden" id="repetition_value_monthday" name="repetition_value_monthday" value="1" />
+        <input type="hidden" min="0" max="31" id="repetition_value" name="repetition_value" value="0" />
+        <input type="hidden" id="details" name="details" placeholder="Details" autocomplete="off" />
+        <input type="hidden" value="#3EB34F" id="color" name="color" />
+    </form>
     <div class="header">
         <input type="button" class="header-button" value="+"
             onclick="window.location='/{{ calendar_id }}/{{ year }}/{{ month}}/new_task'" title="New task" />
@@ -283,6 +295,12 @@
         movingTimeout = undefined;
     };
 
+    function submit_task(eventData) {
+        date = eventData.target.getAttribute("data-year") + "-" + eventData.target.getAttribute("data-month") + "-" + eventData.target.getAttribute("data-day")
+        document.getElementById("date").value = date
+        document.getElementById("create_new_task").submit();
+    }
+
     function reloadIfStale() {
         var ts = localStorage.getItem("ts");
         localStorage.setItem("ts", Date.now());
@@ -313,8 +331,7 @@
         document.getElementById("calendar").onclick = function(eventData) {
             if (eventData.target.nodeName === "LI" && eventData.target.className === "day") {
                 if (++clicksCounter == 1) {
-                    // Single click behaviour (nothing)
-                    clicksTimeout = setTimeout(function() { clicksCounter = 0; }, 300);
+                    clicksTimeout = setTimeout(function() { clicksCounter = 0; submit_task(eventData); }, 300);
                 } else {
                     clearTimeout(clicksTimeout);
                     clicksCounter = 0;

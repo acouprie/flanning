@@ -1,10 +1,8 @@
 FROM python:3.8.0
 
 LABEL title "Flask-calendar"
-LABEL maintainer "Diego / Kartones"
-LABEL contrib1 "https://github.com/Kartones"
-LABEL url "https://kartones.net"
-LABEL twitter "@kartones"
+LABEL maintainer "Antoine Couprie"
+LABEL contrib1 "https://github.com/acouprie"
 
 # Define environment vars to expose to container here
 # ENV <key> <value>
