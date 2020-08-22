@@ -11,17 +11,17 @@
             <br />
             <label>Couleur: </label>
             <br />
-            <input class="form-button color-picker" type="color" value="{{ user_data['user_color'] }}" id="color_custom" />
+            <input class="form-button color-picker" type="color" value="{{ user_data['user_color'] }}" id="color_custom" name="color_custom" />
             <br />
             <label>Nouveau mot de passe : </label>
             <br />
             <input type="password" autocomplete="off" placeholder="Mot de passe" value="" id="password"
-                name="password" minlength="8" required />
+                name="password" minlength="8" />
             <br />
             <label>Répéter mot de passe : </label>
             <br />
             <input type="password" autocomplete="off" placeholder="Répéter mot de passe" value="" id="repeat_password"
-                name="password" minlength="8" required />
+                name="repeat_password" minlength="8" />
             <br />
             <input class="form-button" type="submit" value="Editer le profile" />
         </form>

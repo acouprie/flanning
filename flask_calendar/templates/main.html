@@ -5,7 +5,6 @@
 </head>
 {% block body %}
     <h1>Planning de la Bogerais</h1>
-    <a href={{ url_for('user_edit') }}>Editer le profile</a>
 
     <img id="banner" src="/static/images/chapelle.jpg" alt="Chapelle" />
     <br />
@@ -32,4 +31,5 @@
     <a href={{ url_for('main_calendar_action', calendar_id=calendar_id) }}>Calendar</a>
     <iframe id="calendar_frame" src={{ url_for('main_calendar_action', calendar_id=calendar_id) }}>
     </iframe>
+    <a href={{ url_for('profile') }}>Edite ton profile ici</a>
 {% endblock %}

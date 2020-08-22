@@ -376,18 +376,18 @@ def chat():
     return render_template("chat.html", username=user_data["username"], data=data)
 
 @authenticated
-def user_edit():
+def profile():
+    authentication = get_authentication()
     user_data = get_user_data()
     password = request.form.get('password')
     repeat_password = request.form.get('repeat_password')
     user_color = request.form.get('color_custom')
 
     if request.method == 'POST':
-        if password == repeat_password:
-            get_authentication().edit_user(
-                username=user_data["username"],
-                plaintext_password=password,
-                user_color=user_color
-            )
+        authentication.edit_user(
+            username=user_data["username"],
+            plaintext_password=password,
+            user_color=user_color
+        )
 
-    return render_template("user_edit.html", user_data=user_data)
+    return render_template("profile.html", user_data=user_data)

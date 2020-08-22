@@ -24,7 +24,7 @@ from flask_calendar.actions import (
     update_task_day_action,
     main,
     chat,
-    user_edit
+    profile
 )
 from flask_calendar.app_utils import task_details_for_markup
 
@@ -83,7 +83,7 @@ def create_app(config_overrides: Dict = None) -> Flask:
 
     app.add_url_rule("/", "index_action", index_action, methods=["GET"])
     app.add_url_rule("/chat/", "chat", chat, methods=["GET"])
-    app.add_url_rule("/user/edit/", "user_edit", user_edit, methods=["GET", "POST"])
+    app.add_url_rule("/user/edit/", "profile", profile, methods=["GET", "POST"])
     app.add_url_rule("/login", "login_action", login_action, methods=["GET"])
     app.add_url_rule("/main/<calendar_id>/", "main", main, methods=["GET"])
     app.add_url_rule("/do_login", "do_login_action", do_login_action, methods=["POST"])

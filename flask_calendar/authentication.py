@@ -50,14 +50,23 @@ class Authentication:
         self._save()
 
     def edit_user(self, username: str, plaintext_password: str, user_color: str) -> None:
-        hashed_password = self._hash_password(plaintext_password)
+        if username not in self.contents:
+            raise ValueError("L'utilisateur {} n'existe pas.".format(username))
+        user = self.contents[username]
+        if plaintext_password != None and plaintext_password != '':
+            hashed_password = self._hash_password(plaintext_password)
+            self.contents[username].update(
+                {
+                    "password": hashed_password,
+                }
+            )
+        #if user_color != None and user_color != '':
         self.contents[username].update(
             {
-                "password": hashed_password,
                 "user_color": user_color,
             }
         )
-        self._save()
+        self._edit(username, user)
 
     def delete_user(self, username: str) -> None:
         self.contents.pop(username)
@@ -71,6 +80,16 @@ class Authentication:
     def _save(self) -> None:
         with open(os.path.join(".", self.data_folder, self.USERS_FILENAME), "w") as file:
             json.dump(self.contents, file)
+
+    def _edit(self, username, user) -> None:
+        user_file = os.path.join(".", self.data_folder, self.USERS_FILENAME)
+        users = ''
+        with open(user_file, "r") as file:
+            users = json.load(file)
+            users[username] = user
+        open(user_file, 'w').close()
+        with open(user_file, "w") as file:
+            json.dump(users, file)
 
     def _failed_attempt(self, username: str) -> None:
         key = "LF_{}".format(username)
