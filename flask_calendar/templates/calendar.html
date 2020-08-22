@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <title>Calendar</title>
@@ -9,9 +9,9 @@
 </head>
 <body>
 
-    <div id="statusbar" class="">Processing...</div>
+    <div id="statusbar" class="">Chargement...</div>
     <form id="create_new_task" method="POST" action="/{{ calendar_id }}/new_task">
-        <input type="hidden" autocomplete="off" tabindex="0" placeholder="Title" value="Test"
+        <input type="hidden" autocomplete="off" tabindex="0" placeholder="Title" value="{{ username }}"
         id="title" name="title" minlength="2" required />
         <input type="hidden" id="date" name="date" value="2020-08-11" />
         <input type="hidden" id="is_all_day" name="is_all_day" value="1" />
@@ -21,7 +21,7 @@
         <input type="hidden" id="repetition_value_monthday" name="repetition_value_monthday" value="1" />
         <input type="hidden" min="0" max="31" id="repetition_value" name="repetition_value" value="0" />
         <input type="hidden" id="details" name="details" placeholder="Details" autocomplete="off" />
-        <input type="hidden" value="#3EB34F" id="color" name="color" />
+        <input type="hidden" value="{{ T }}" id="color" name="color" />
     </form>
     <div class="header">
         <input type="button" class="header-button" value="+"
@@ -39,7 +39,7 @@
             </div>
         {% endif %}
         {% if display_view_past_button %}
-            <input id="toggle-past-events" class="toggle-past-events" type="button" value="View Past" onclick="ToggleViewPastTasks();" />
+            <input id="toggle-past-events" class="toggle-past-events" type="button" value="Voir présences passées" onclick="ToggleViewPastTasks();" />
         {% endif %}
     </div>
 
@@ -296,8 +296,10 @@
     };
 
     function submit_task(eventData) {
-        date = eventData.target.getAttribute("data-year") + "-" + eventData.target.getAttribute("data-month") + "-" + eventData.target.getAttribute("data-day")
-        document.getElementById("date").value = date
+        date = eventData.target.getAttribute("data-year") + "-" +
+            eventData.target.getAttribute("data-month") + "-" +
+            eventData.target.getAttribute("data-day");
+        document.getElementById("date").value = date;
         document.getElementById("create_new_task").submit();
     }
 

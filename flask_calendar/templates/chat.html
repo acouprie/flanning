@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/css/chat.css">
+        <title>Chat</title>
+        <script type="application/javascript">
+            window.onload = function() {
+                window.scroll(0, document.documentElement.scrollHeight)
+            }         
+        </script>
+    </head>
+    <body>
+        <div id="chat_container">
+            <div id="messages">
+                {% for message in data %}
+                <div><b style="color: #000">{{ data[message]['user_name'] }} : </b> {{ data[message]['message'] }} </div>
+                {% endfor %}
+                <div class="message_holder"></div>
+            </div>
+            <div id="chat_input">
+                <form action="" method="POST">
+                    <input type="hidden" class="username" value="{{ username }}" />
+                    <input type="text" class="message" placeholder="Message" />
+                    <input type="submit" value="Envoi" />
+                </form>
+            </div>
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('{{ base_url }}');
+
+            socket.on( 'connect', function() {
+                var form = $( 'form' ).on( 'submit', function( e ) {
+                    e.preventDefault()
+                    let user_name = $( 'input.username' ).val()
+                    let user_input = $( 'input.message' ).val()
+                    socket.emit( 'my event', {
+                        user_name : user_name,
+                        message : user_input
+                    } )
+                    $( 'input.message' ).val( '' ).focus()
+                } )
+            } )
+            socket.on( 'my response', function( msg ) {
+            console.log( msg )
+            if( typeof msg.user_name !== 'undefined' ) {
+                $( 'div.message_holder' ).append( '<div><b style="color: #000">'+ msg.time +' '+ msg.user_name+' : </b> '+msg.message+'</div>' )
+            }
+            })
+        </script>
+
+    </body>
+</html>

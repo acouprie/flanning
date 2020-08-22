@@ -3,11 +3,11 @@ import json
 import os
 import time
 from typing import Dict, cast
+import random
 
 from cachelib.simple import SimpleCache
 
 cache = SimpleCache()
-
 
 class Authentication:
 
@@ -35,14 +35,28 @@ class Authentication:
 
     def add_user(self, username: str, plaintext_password: str, default_calendar: str) -> None:
         if username in self.contents:
-            raise ValueError("Username {} already exists".format(username))
+            raise ValueError("Le nom {} existe déjà.".format(username))
         hashed_password = self._hash_password(plaintext_password)
+        random_number = random.randint(0,16777215)
+        hex_number = str(hex(random_number))
+        hex_number ='#'+ hex_number[2:]
         self.contents[username] = {
             "username": username,
             "password": hashed_password,
             "default_calendar": default_calendar,
+            "user_color": hex_number,
             "ics_key": "an_ics_key",
         }
+        self._save()
+
+    def edit_user(self, username: str, plaintext_password: str, user_color: str) -> None:
+        hashed_password = self._hash_password(plaintext_password)
+        self.contents[username].update(
+            {
+                "password": hashed_password,
+                "user_color": user_color,
+            }
+        )
         self._save()
 
     def delete_user(self, username: str) -> None:

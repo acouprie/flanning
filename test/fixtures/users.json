@@ -2,6 +2,7 @@
     "a_username": {
         "username": "a_username",
         "password": "8c2a58390a8a0816cd58307fae930b13e5b185ae430054dd2da855728ef0e656",
-        "default_calendar": "sample"
+        "default_calendar": "sample",
+        "user_color": "#2966B8"
     }
 }

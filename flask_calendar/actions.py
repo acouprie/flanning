@@ -1,8 +1,9 @@
 import re
 from typing import Optional, cast  # noqa: F401
-
+import json
 import flask_calendar.constants as constants
 from flask import abort, current_app, g, jsonify, make_response, redirect, render_template, request
+from flask_cors import CORS
 from flask_calendar.app_utils import (
     add_session,
     authenticated,
@@ -17,6 +18,11 @@ from flask_calendar.calendar_data import CalendarData
 from flask_calendar.gregorian_calendar import GregorianCalendar
 from werkzeug.wrappers import Response
 
+def get_user_data():
+    username = get_session_username(session_id=str(request.cookies.get(constants.SESSION_ID)))
+    authentication = get_authentication()
+    user_data = authentication.user_data(username)
+    return user_data
 
 def get_authentication() -> Authentication:
     auth = getattr(g, "_auth", None)
@@ -28,19 +34,18 @@ def get_authentication() -> Authentication:
         )
     return cast(Authentication, auth)
 
-
 @authenticated
 def index_action() -> Response:
     username = get_session_username(session_id=str(request.cookies.get(constants.SESSION_ID)))
     authentication = get_authentication()
     user_data = authentication.user_data(username)
     return redirect("/main/{}/".format(user_data["default_calendar"]))
-    #return redirect("/{}/".format(user_data["default_calendar"]))
 
 @authenticated
 @authorized
 def main(calendar_id: str) -> Response:
-    return cast(Response, render_template("main.html", calendar_id=calendar_id))
+    user_data = get_user_data()
+    return cast(Response, render_template("main.html", calendar_id=calendar_id, username=user_data["username"]))
 
 def login_action() -> Response:
     return cast(Response, render_template("login.html"))
@@ -73,7 +78,6 @@ def do_login_action() -> Response:
         return cast(Response, response)
     else:
         return redirect("/login")
-
 
 @authenticated
 @authorized
@@ -109,6 +113,8 @@ def main_calendar_action(calendar_id: str) -> Response:
     else:
         weekdays_headers = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
+    user_data = get_user_data()
+
     return cast(
         Response,
         render_template(
@@ -127,6 +133,8 @@ def main_calendar_action(calendar_id: str) -> Response:
             tasks=tasks,
             display_view_past_button=current_app.config["SHOW_VIEW_PAST_BUTTON"],
             weekdays_headers=weekdays_headers,
+            color=user_data["user_color"],
+            username=user_data["username"],
         ),
     )
 
@@ -359,3 +367,27 @@ def hide_repetition_task_instance_action(calendar_id: str, year: str, month: str
     )
 
     return cast(Response, jsonify({}))
+
+@authenticated
+def chat():
+    user_data = get_user_data()
+    with open('data/chat.json', 'r') as file:
+        data = json.load(file)
+    return render_template("chat.html", username=user_data["username"], data=data)
+
+@authenticated
+def user_edit():
+    user_data = get_user_data()
+    password = request.form.get('password')
+    repeat_password = request.form.get('repeat_password')
+    user_color = request.form.get('color_custom')
+
+    if request.method == 'POST':
+        if password == repeat_password:
+            get_authentication().edit_user(
+                username=user_data["username"],
+                plaintext_password=password,
+                user_color=user_color
+            )
+
+    return render_template("user_edit.html", user_data=user_data)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Edition du profile</title>
+    </head>
+    <body>
+        <h1>Edition du profile utilisateur</h1>
+        <form action="/user/edit/" method="POST">
+            <h2>Utilisateur: {{ user_data['username'] }}</h2>
+            <br />
+            <label>Couleur: </label>
+            <br />
+            <input class="form-button color-picker" type="color" value="{{ user_data['user_color'] }}" id="color_custom" />
+            <br />
+            <label>Nouveau mot de passe : </label>
+            <br />
+            <input type="password" autocomplete="off" placeholder="Mot de passe" value="" id="password"
+                name="password" minlength="8" required />
+            <br />
+            <label>Répéter mot de passe : </label>
+            <br />
+            <input type="password" autocomplete="off" placeholder="Répéter mot de passe" value="" id="repeat_password"
+                name="password" minlength="8" required />
+            <br />
+            <input class="form-button" type="submit" value="Editer le profile" />
+        </form>
+        {{ user_data }}
+    </body>
+</html>
