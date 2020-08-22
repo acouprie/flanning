@@ -46,10 +46,8 @@
                 } )
             } )
             socket.on( 'my response', function( msg ) {
-            console.log( msg )
-            if( typeof msg.user_name !== 'undefined' ) {
+                console.log( msg )
                 $( 'div.message_holder' ).append( '<div><b style="color: #000">'+ msg.time +' '+ msg.user_name+' : </b> '+msg.message+'</div>' )
-            }
             })
         </script>
 
