@@ -5,7 +5,7 @@
 
 This project is a fork of [Flask-Calendar](https://github.com/Kartones/flask-calendar).
 
-I use Kartones work inside a frame as a submodule of my Flask application. I have also added user edition.
+I use Kartones work inside a frame as a submodule of my Flask application. I have also added user edition and a chat.
 
 This website has for goal to organise familly reunions.
 
