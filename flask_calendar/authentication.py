@@ -49,7 +49,7 @@ class Authentication:
         }
         self._save()
 
-    def edit_user(self, username: str, plaintext_password: str, user_color: str) -> None:
+    def edit_user(self, username: str, email: str, plaintext_password: str, user_color: str) -> None:
         if username not in self.contents:
             raise ValueError("L'utilisateur {} n'existe pas.".format(username))
         user = self.contents[username]
@@ -60,12 +60,18 @@ class Authentication:
                     "password": hashed_password,
                 }
             )
-        #if user_color != None and user_color != '':
-        self.contents[username].update(
-            {
-                "user_color": user_color,
-            }
-        )
+        if user_color != None and user_color != '':
+            self.contents[username].update(
+                {
+                    "user_color": user_color,
+                }
+            )
+        if email != None and email != '':
+            self.contents[username].update(
+                {
+                    "email": email,
+                }
+            )
         self._edit(username, user)
 
     def delete_user(self, username: str) -> None:

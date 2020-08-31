@@ -10,9 +10,14 @@
         Change la couleur de tes présences par défaut et/ou ton mot de passe.
         <form action="/user/edit/" method="POST">
             <p>
-                <label>Couleur: </label>
+                <label>Couleur :</label>
                 <br />
                 <input class="form-button color-picker" type="color" value="{{ user_data['user_color'] }}" id="color_custom" name="color_custom" />
+            </p>
+            <p>
+                <label>Email :</label>
+                <br />
+                <input type="email" autocomplete="off" value="{{ user_data['email'] }}" id="email" name="email" placeholder="Email" />
             </p>
             <p>
                 <label>Nouveau mot de passe : </label>

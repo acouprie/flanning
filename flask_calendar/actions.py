@@ -381,11 +381,13 @@ def profile():
     user_data = get_user_data()
     password = request.form.get('password')
     repeat_password = request.form.get('repeat_password')
+    email = request.form.get('email')
     user_color = request.form.get('color_custom')
 
     if request.method == 'POST':
         authentication.edit_user(
             username=user_data["username"],
+            email=email,
             plaintext_password=password,
             user_color=user_color
         )
