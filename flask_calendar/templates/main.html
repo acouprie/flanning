@@ -19,7 +19,7 @@
         <ul>
             <p>
                 <li>L'ajout de présence ne fonctionne pas sur mobile (consultation uniquement).</li>
-                <li><a href={{ url_for('profile') }}>Edite ton profile</a>, change ta couleur, modifie ton mot de passe et ajoute ton adresse email, comme ça tu seras prévenu quand quelqu'un ajoute une présence ou publie dans le chat.</li>
+                <li><a href={{ url_for('profile') }}>Edite ton profil</a>, change ta couleur, modifie ton mot de passe et ajoute ton adresse email, comme ça tu seras prévenu quand quelqu'un ajoute une présence ou publie dans le chat.</li>
             </p>
             <p>
                 En cliquant sur un jour :
@@ -35,5 +35,5 @@
     </div>
     <iframe id="calendar_frame" src={{ url_for('main_calendar_action', calendar_id=calendar_id) }}>
     </iframe>
-    <a href={{ url_for('profile') }}>Edite ton profile ici</a>
+    <a href={{ url_for('profile') }}>Edite ton profil ici</a>
 {% endblock %}

@@ -2,11 +2,11 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Edition du profile</title>
+        <title>Edition du profil</title>
         <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     </head>
     <body>
-        <h1>Edition du profile {{ user_data['username'] }}</h1>
+        <h1>Edition du profil {{ user_data['username'] }}</h1>
         Change la couleur de tes présences par défaut et/ou ton mot de passe.
         <form action="/user/edit/" method="POST">
             <p>
@@ -31,7 +31,7 @@
                 <input type="password" autocomplete="off" placeholder="Répéter mot de passe" value="" id="repeat_password"
                     name="repeat_password" minlength="8" />
             </p>
-            <input class="form-button" type="submit" value="Editer le profile" />
+            <input class="form-button" type="submit" value="Editer le profil" />
         </form>
         <p>
             <a href={{ url_for('main', calendar_id = user_data["default_calendar"]) }}>Retour à l'accueil</a>
